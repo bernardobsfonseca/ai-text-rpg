@@ -86,5 +86,5 @@ class MenuPlay(MenuBase):
 
         num = randint(0, 20)
         if num > 12:
-            self.menu_battle = MenuBattle()
+            self.menu_battle = MenuBattle(self.hero)
             self.in_battle = True
