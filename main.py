@@ -3,11 +3,11 @@ from States.menu_inicial import MenuInicial
 from States.menu_play import MenuPlay
 
 menu_inicial = MenuInicial()
-
+menu_play = None  # Inicializa menu_play como None
 
 def start():
-    hero = None
-    seed_value = None
+    #hero = None
+    #seed_value = None
     run = True
     play = False
 
@@ -16,9 +16,11 @@ def start():
             hero, seed_value = menu_inicial.draw_menu()
             clear()
             if hero:
+                # Apenas inicializa menu_play se houver um novo herói
+                global menu_play  # Declarando como global para poder modificar a variável global dentro da função
+                menu_play = MenuPlay(hero, seed_value)
                 play = True
         else:
-            menu_play = MenuPlay(hero, seed_value)
             play = menu_play.draw_menu()
 
 

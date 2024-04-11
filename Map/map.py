@@ -18,7 +18,7 @@ forest = Tile("8", ANSI_GREEN)
 pines = Tile("Y", ANSI_GREEN)
 mountain = Tile("A", ANSI_WHITE)
 water = Tile("~", ANSI_CYAN)
-player = Tile("&", ANSI_RED)
+player = Tile("P", ANSI_RED)
 
 class Map:
     def __init__(self, width: int, height: int, seed: int, hero) -> None:
