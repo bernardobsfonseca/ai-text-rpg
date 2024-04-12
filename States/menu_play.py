@@ -1,5 +1,6 @@
 import time
 
+from Characters import enemies
 from Map.map import Map
 from Misc import misc
 from Misc.misc import save_game, clear
@@ -26,55 +27,56 @@ class MenuPlay(MenuBase):
     def draw_menu(self):
 
         if not self.in_battle:
-            misc.draw_line()
-            print(f"LOC: {self.hero.x}, {self.hero.y}")
-            print("STATUS")
-            print(f"NOME: {self.hero.name}")
-            print(f"HP: {self.hero.hp}")
-            print(f"ATAQUE: {self.hero.atk}")
-            print(f"POÇÕES: {self.hero.potions}")
-            print(f"GEMS: {self.hero.gems}")
-            misc.draw_line()
-            print("1 - Norte")
-            print("2 - Leste")
-            print("3 - Sul")
-            print("4 - Oeste")
-            print("5 - Usar poção")
-            print("0 - Salvar e sair")
-            misc.draw_line()
-
-            # draw map
-            self.game_map.display_map()
-            misc.draw_line()
-
-            choice = input("# ")
-
-            if choice == "0":
-                save_game(self.hero, self.seed_value)
-                clear()
-                return False
-            elif choice == "1":
-                if self.hero.y < self.map_y and self.hero.y > 0:
-                    self.hero.y -= 1
-                    self.passo()
-            elif choice == "2":
-                if self.hero.x < self.map_x-1:
-                    self.hero.x += 1
-                    self.passo()
-            elif choice == "3":
-                if self.hero.y < self.map_y-1:
-                    self.hero.y += 1
-                    self.passo()
-            elif choice == "4":
-                if self.hero.x < self.map_x and self.hero.x > 0:
-                    self.hero.x -= 1
-                    self.passo()
-            elif choice == "5":
-                pass
+            self.draw_menu_play()
+            clear()
         else:
             self.in_battle = self.menu_battle.draw_menu()
 
-    clear()
+    def draw_menu_play(self):
+        misc.draw_line()
+        print(f"LOC: {self.hero.x}, {self.hero.y}")
+        print("STATUS")
+        print(f"NOME: {self.hero.name}")
+        print(f"HP: {self.hero.hp}")
+        print(f"ATAQUE: {self.hero.atk}")
+        print(f"POÇÕES: {self.hero.potions}")
+        print(f"GEMS: {self.hero.gems}")
+        misc.draw_line()
+        print("1 - Norte")
+        print("2 - Leste")
+        print("3 - Sul")
+        print("4 - Oeste")
+        print("5 - Usar poção")
+        print("0 - Salvar e sair")
+        misc.draw_line()
+
+        self.game_map.display_map()
+        misc.draw_line()
+
+        choice = input("# ")
+
+        if choice == "0":
+            save_game(self.hero, self.seed_value)
+            clear()
+            return False
+        elif choice == "1":
+            if self.hero.y < self.map_y and self.hero.y > 0:
+                self.hero.y -= 1
+                self.passo()
+        elif choice == "2":
+            if self.hero.x < self.map_x - 1:
+                self.hero.x += 1
+                self.passo()
+        elif choice == "3":
+            if self.hero.y < self.map_y - 1:
+                self.hero.y += 1
+                self.passo()
+        elif choice == "4":
+            if self.hero.x < self.map_x and self.hero.x > 0:
+                self.hero.x -= 1
+                self.passo()
+        elif choice == "5":
+            pass
 
     def passo(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
@@ -86,5 +88,11 @@ class MenuPlay(MenuBase):
 
         num = randint(0, 20)
         if num > 12:
-            self.menu_battle = MenuBattle(self.hero)
+            enemy_selected = self.select_enemy()
+            self.menu_battle = MenuBattle(self.hero, enemy_selected)
             self.in_battle = True
+
+    def select_enemy(self):
+        return enemies.list_enemies[
+            randint(0, len(enemies.list_enemies)-1)
+        ]

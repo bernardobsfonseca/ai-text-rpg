@@ -31,7 +31,7 @@ class MenuInicial(MenuBase):
 
     def novo_jogo(self):
         name = input("Digite seu nome: ")
-        hero = Hero(name=name, hp=30, atk=5)
+        hero = Hero(name=name)
         seed_value = randint(0, 1000)
 
         return hero, seed_value

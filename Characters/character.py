@@ -9,4 +9,5 @@ class Character:
         target.hp -= self.atk
         target.hp = max(target.hp, 0)
 
-        print(f"{self.name} atacou {target.name} e causou {self.atk} de dano")
+        print(f"{self.name} atacou {target.name} e causou "
+              f"{self.atk} de dano")
