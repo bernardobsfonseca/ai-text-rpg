@@ -9,7 +9,8 @@ class Hero(Character):
         self.potions = potions
         self.gems = gems
         self.x = x
-        self. y = y
+        self.y = y
+        self.alive = True
 
     def use_potion(self):
         if self.potions > 0:

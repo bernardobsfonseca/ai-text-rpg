@@ -27,6 +27,11 @@ class MenuPlay(MenuBase):
     def draw_menu(self):
 
         if not self.in_battle:
+            if self.hero.alive is False:
+                misc.clear()
+                self.draw_death()
+                input("> ")
+                return False
             return self.draw_menu_play()
         else:
             self.in_battle = self.menu_battle.draw_menu()
@@ -108,3 +113,13 @@ class MenuPlay(MenuBase):
         print("4 - Oeste")
         print("5 - Usar poção")
         print("0 - Salvar e sair")
+
+    def draw_death(self):
+        print("""
+         __     ______  _    _   _____ _____ ______ _____  
+         \ \   / / __ \| |  | | |  __ \_   _|  ____|  __ \ 
+          \ \_/ / |  | | |  | | | |  | || | | |__  | |  | |
+           \   /| |  | | |  | | | |  | || | |  __| | |  | |
+            | | | |__| | |__| | | |__| || |_| |____| |__| |
+            |_|  \____/ \____/  |_____/_____|______|_____/ 
+        """)
