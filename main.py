@@ -21,6 +21,7 @@ def start():
                 play = True
         else:
             play = menu_play.draw_menu()
+            clear()
 
 
 if __name__ == '__main__':

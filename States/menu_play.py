@@ -27,8 +27,7 @@ class MenuPlay(MenuBase):
     def draw_menu(self):
 
         if not self.in_battle:
-            self.draw_menu_play()
-            clear()
+            return self.draw_menu_play()
         else:
             self.in_battle = self.menu_battle.draw_menu()
 
@@ -57,7 +56,6 @@ class MenuPlay(MenuBase):
 
         if choice == "0":
             save_game(self.hero, self.seed_value)
-            clear()
             return False
         elif choice == "1":
             if self.hero.y < self.map_y and self.hero.y > 0:
