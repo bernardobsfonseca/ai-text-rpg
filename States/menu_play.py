@@ -1,5 +1,4 @@
 import time
-
 from Characters import enemies
 from Map.map import Map
 from Misc import misc
