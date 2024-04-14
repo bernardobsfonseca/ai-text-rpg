@@ -11,3 +11,5 @@ class Character:
 
         print(f"{self.name} atacou {target.name} e causou "
               f"{self.atk} de dano")
+
+        input(">")
