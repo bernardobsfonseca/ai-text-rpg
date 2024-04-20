@@ -1,7 +1,8 @@
 from random import randint, seed
 
 class Tile:
-    def __init__(self, symbol: str, color: str | None = None):
+    def __init__(self, name:str, symbol: str, color: str | None = None):
+        self.name = name
         self.symbol = f"{color}{symbol}{ANSI_RESET}" if color else symbol
 
 ANSI_RESET = "\033[0m"
@@ -13,12 +14,13 @@ ANSI_WHITE = "\033[97m"
 ANSI_MAGENTA = "\033[35m"
 ANSI_CYAN = "\033[36m"
 
-plains = Tile(".", ANSI_YELLOW)
-forest = Tile("8", ANSI_GREEN)
-pines = Tile("Y", ANSI_GREEN)
-mountain = Tile("A", ANSI_WHITE)
-water = Tile("~", ANSI_CYAN)
-player = Tile("P", ANSI_RED)
+plains = Tile("plains", ".", ANSI_YELLOW)
+forest = Tile("forest", "8", ANSI_GREEN)
+pines = Tile("pines", "Y", ANSI_GREEN)
+mountain = Tile("mountain", "A", ANSI_WHITE)
+water = Tile("water", "~", ANSI_CYAN)
+player = Tile("player", "P", ANSI_RED)
+
 
 class Map:
     def __init__(self, width: int, height: int, seed: int, hero) -> None:
@@ -28,6 +30,7 @@ class Map:
 
         self.map_data: list[list[Tile]]
         self.full_map = []
+        self.current_tile = ''
 
         self.generate_map()
         self.generate_patch(forest, 1, 5, 7)
@@ -77,6 +80,7 @@ class Map:
             row_tiles = []
             for x, tile in enumerate(row):
                 if x == player_x and y == player_y:
+                    self.current_tile = tile.name
                     row_tiles.append(player.symbol)
                 else:
                     row_tiles.append(tile.symbol)

@@ -15,8 +15,7 @@ def start():
             hero, seed_value = menu_inicial.draw_menu()
             clear()
             if hero:
-                # Apenas inicializa menu_play se houver um novo herói
-                global menu_play  # Declarando como global para poder modificar a variável global dentro da função
+                global menu_play
                 menu_play = MenuPlay(hero, seed_value)
                 play = True
         else:

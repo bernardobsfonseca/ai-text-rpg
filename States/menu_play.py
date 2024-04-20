@@ -43,6 +43,7 @@ class MenuPlay(MenuBase):
         self.draw_opcoes_hero()
         misc.draw_line()
 
+        print(f"Tile atual: {self.game_map.current_tile}")
         self.game_map.display_map()
 
         misc.draw_line()
@@ -74,7 +75,21 @@ class MenuPlay(MenuBase):
 
     def passo(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
+        self.event()
+
+    def event(self):
+        seed_value = int(time.time())
+        seed(seed_value)
         self.battle_chance()
+
+        num = randint(0, 10)
+        if num > 5:
+            self.event_ai()
+        else:
+            self.battle_chance()
+
+    def event_ai(self):
+        pass
 
     def battle_chance(self):
         seed_value = int(time.time())
