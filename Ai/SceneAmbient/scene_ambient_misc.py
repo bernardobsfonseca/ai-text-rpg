@@ -35,7 +35,8 @@ example_prompt = PromptTemplate(
 
 prefix = """
 The following are exerts of descriptions of scenarios for a rpg.
-Use them as examples to describe the last scene, and don't create your own scenes.
+Use them as examples to describe the last scene, and don't create 
+your own scenes.
 Using an max o 50 words.
 """
 

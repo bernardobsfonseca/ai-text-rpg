@@ -61,25 +61,25 @@ class MenuPlay(MenuBase):
         elif self.choice == "1":
             if self.hero.y < self.map_y and self.hero.y > 0:
                 self.hero.y -= 1
-                self.passo()
+                self.step()
         elif self.choice == "2":
             if self.hero.x < self.map_x - 1:
                 self.hero.x += 1
-                self.passo()
+                self.step()
         elif self.choice == "3":
             if self.hero.y < self.map_y - 1:
                 self.hero.y += 1
-                self.passo()
+                self.step()
         elif self.choice == "4":
             if self.hero.x < self.map_x and self.hero.x > 0:
                 self.hero.x -= 1
-                self.passo()
+                self.step()
         elif self.choice == "5":
             self.hero.use_potion()
 
         return self.status_play()
 
-    def passo(self):
+    def step(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
         self.event()
 

@@ -20,29 +20,29 @@ class MenuInicial(MenuBase):
         choice = input("# ")
 
         if choice == "1":
-            return self.novo_jogo()
+            return self.new_game()
         elif choice == "2":
-            return self.carregar_jogo()
+            return self.load_game()
         elif choice == "3":
-            self.como_jogar()
+            self.how_to_play()
         elif choice == "4":
             self.sair()
             misc.clear()
 
-    def novo_jogo(self):
+    def new_game(self):
         name = input("Digite seu nome: ")
         hero = Hero(name=name)
         seed_value = randint(0, 1000)
 
         return hero, seed_value
 
-    def carregar_jogo(self):
+    def load_game(self):
         name_character = input("Insira o nome do personagem: ")
         hero, seed_value = misc.load_game(name_character)
 
         return hero, seed_value
 
-    def como_jogar(self):
+    def how_to_play(self):
         pass
 
     def sair(self):
