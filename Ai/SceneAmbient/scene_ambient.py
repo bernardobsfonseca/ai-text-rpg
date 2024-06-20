@@ -34,10 +34,7 @@ class SceneAmbient(AiModel):
         )
 
     def create_chain(self):
-        chain = LLMChain(
-            prompt=self.prompt,
-            llm=self.llm
-        )
+        chain = self.prompt | self.llm
 
         return chain
 
