@@ -1,13 +1,12 @@
 from langchain.chains.llm import LLMChain
-from langchain_community.llms import LlamaCpp
-from langchain_core.prompts.few_shot import FewShotPromptTemplate
-from Ai.SceneAmbient import scene_ambient_misc as ms
+from langchain_community.llms.llamacpp import LlamaCpp
+from langchain_core.prompts import FewShotPromptTemplate
+from Ai.SceneEnemy import scene_enemy_misc as es
 from Ai.ai_model import AiModel
 
-scene_ambient = None
+scene_enemy = None
 
-
-class SceneAmbient(AiModel):
+class SceneEnemy(AiModel):
     def __init__(self):
         super().__init__()
 
@@ -17,10 +16,10 @@ class SceneAmbient(AiModel):
 
     def load_prompt(self):
         self.prompt = FewShotPromptTemplate(
-            examples=ms.examples,
-            example_prompt=ms.example_prompt,
-            prefix=ms.prefix,
-            suffix=ms.suffix,
+            examples=es.examples,
+            example_prompt=es.example_prompt,
+            prefix=es.prefix,
+            suffix=es.suffix,
             input_variables=["scene"]
         )
 
@@ -45,7 +44,7 @@ class SceneAmbient(AiModel):
         self.chain.invoke({"scene": scene})
 
 
-def initialize_scene_embient():
-    global scene_ambient
-    scene_ambient = SceneAmbient()
-    scene_ambient.create_scene("Write 'Loading scene'")
+def initialize_scene_enemy():
+    global scene_enemy
+    scene_enemy = SceneEnemy()
+    scene_enemy.create_scene("Write 'Loading scene'")

@@ -1,7 +1,7 @@
 import time
 
-from Ai.SceneAmbient.scene_ambient import SceneAmbient
-from Ai.SceneAmbient.scene_ambient_modifiers import get_weather_modifier, get_day_time_modifier
+from Ai.SceneAmbient import scene_ambient as se
+from Ai.SceneAmbient import scene_ambient_modifiers as ambient_modifiers
 from Characters import enemies
 from Map.map import Map
 from Misc import misc
@@ -27,7 +27,6 @@ class MenuPlay(MenuBase):
         self.in_battle = False
         self.choice = ""
 
-        self.scene_ambient = SceneAmbient()
         self.previous_terrain = ""
 
     def draw_menu(self):
@@ -89,17 +88,16 @@ class MenuPlay(MenuBase):
 
         num = randint(0, 10)
         if num >= 9:
-             self.battle_event()
+            self.battle_event()
 
     def event_ambient(self):
-        weather = get_weather_modifier()
+        weather = ambient_modifiers.get_weather_modifier()
         terrain = self.game_map.current_tile
-        day_time = get_day_time_modifier()
-        print(f"{weather} {terrain} {day_time}")
+        day_time = ambient_modifiers.get_day_time_modifier()
 
         if self.previous_terrain != terrain:
             self.previous_terrain = terrain
-            self.scene_ambient.create_scene(f"a {weather} {terrain} at {day_time}")
+            se.scene_ambient.create_scene(f"a {weather} {terrain} at {day_time}")
             print("\n")
 
     def battle_event(self):
@@ -107,9 +105,10 @@ class MenuPlay(MenuBase):
         seed(seed_value)
 
         num = randint(0, 20)
-        if num > 12:
+        if num > 0:
             enemy_selected = self.select_enemy()
-            self.menu_battle = MenuBattle(self.hero, enemy_selected)
+            self.menu_battle = MenuBattle(self.hero, enemy_selected,
+                                          self.game_map.current_tile)
             self.in_battle = True
 
     def select_enemy(self):

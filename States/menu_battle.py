@@ -1,18 +1,29 @@
 from random import randint
 from Misc import misc
 from States.menu_base import MenuBase
+from Ai.SceneEnemy.scene_enemy import SceneEnemy
+from Ai.SceneEnemy import scene_enemy_modifiers as enemy_modifiers
 
 
 class MenuBattle(MenuBase):
-    def __init__(self, hero, enemy):
+    def __init__(self, hero, enemy, terrain):
         super().__init__()
 
         self.hero = hero
         self.enemy = enemy
+        self.terrain = terrain
 
         self.choice = ""
+        self.scene_loaded = False
+
+        self.scene_enemy = SceneEnemy()
 
     def draw_menu(self):
+        if not self.scene_loaded:
+            misc.draw_line()
+            self.create_encounter()
+            self.scene_loaded = True
+
         misc.draw_line()
         self.draw_status_hero()
         misc.draw_line()
@@ -74,3 +85,10 @@ class MenuBattle(MenuBase):
             return False
 
         return True
+
+    def create_encounter(self):
+        weather = enemy_modifiers.get_weather_modifier()
+        mode = enemy_modifiers.get_mode_modifier()
+        self.scene_enemy.create_scene(f"a {mode} {self.enemy.name} "
+                                      f"in a {weather} {self.terrain}")
+        print("\n")

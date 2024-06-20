@@ -18,7 +18,7 @@ plains = Tile("plains", ".", ANSI_YELLOW)
 forest = Tile("forest", "8", ANSI_GREEN)
 pines = Tile("pines", "Y", ANSI_GREEN)
 mountain = Tile("mountain", "A", ANSI_WHITE)
-water = Tile("water", "~", ANSI_CYAN)
+water = Tile("lake", "~", ANSI_CYAN)
 player = Tile("player", "P", ANSI_RED)
 
 

@@ -2,11 +2,20 @@ from random import randint
 from Characters.hero import Hero
 from Misc import misc
 from States.menu_base import MenuBase
+from Ai.SceneAmbient import scene_ambient as sa
+from Ai.SceneEnemy import scene_enemy as se
 
 
 class MenuInicial(MenuBase):
     def __init__(self):
         super().__init__()
+
+        print("Carregando...\n")
+
+        sa.initialize_scene_embient()
+        se.initialize_scene_enemy()
+
+        misc.clear()
 
     def draw_menu(self):
         misc.draw_logo()
