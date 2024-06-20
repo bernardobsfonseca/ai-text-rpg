@@ -35,7 +35,7 @@ class MenuPlay(MenuBase):
             if self.hero.alive is False:
                 misc.clear()
                 self.draw_death()
-                input("> ")
+                input(">")
                 return False
             return self.draw_menu_play()
         else:
@@ -75,6 +75,7 @@ class MenuPlay(MenuBase):
                 self.step()
         elif self.choice == "5":
             self.hero.use_potion()
+            input(">")
 
         return self.status_play()
 
