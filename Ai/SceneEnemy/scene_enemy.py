@@ -1,8 +1,8 @@
-from langchain.chains.llm import LLMChain
 from langchain_community.llms.llamacpp import LlamaCpp
 from langchain_core.prompts import FewShotPromptTemplate
 from Ai.SceneEnemy import scene_enemy_misc as es
 from Ai.ai_model import AiModel
+from Misc import global_vars
 
 scene_enemy = None
 
@@ -25,7 +25,7 @@ class SceneEnemy(AiModel):
 
     def load_llm(self):
         self.llm = LlamaCpp(
-            model_path="C:/Unesp/TCC/Models/llama-2-7b-chat.Q4_K_M.gguf",
+            model_path=global_vars.model_path,
             temperature=0,
             max_tokens=500,
             callback_manager=self.callback_manager,
