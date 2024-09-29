@@ -19,4 +19,8 @@ class Hero(Character):
             if self.hp > self.max_hp:
                 self.hp = self.max_hp
 
-        print(f"{self.name} usou uma poção e recuperou 15 de HP")
+        print(f"{self.name} used a potion")
+
+    def sharpen_sword(self):
+        self.atk += 5
+        print(f"{self.name} attack has increased")

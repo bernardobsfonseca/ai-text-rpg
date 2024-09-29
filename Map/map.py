@@ -20,6 +20,7 @@ pines = Tile("pines", "Y", ANSI_GREEN)
 mountain = Tile("mountain", "A", ANSI_WHITE)
 water = Tile("lake", "~", ANSI_CYAN)
 player = Tile("player", "P", ANSI_RED)
+merchant = Tile("merchant", "M", ANSI_RED)
 
 
 class Map:
@@ -37,12 +38,13 @@ class Map:
         self.generate_patch(pines, 0, 2, 5)
         self.generate_patch(mountain, 3, 5, 7)
         self.generate_patch(water, 1, 5, 8)
+        self.generate_patch(merchant, 1, 1, 1, False)
 
         self.construct_map(player_x=hero.x, player_y=hero.y)
 
     def generate_map(self) -> None:
         if self.seed is not None:
-            seed(self.seed)  # Configurando a semente para o gerador de números aleatórios
+            seed(self.seed)
 
         self.map_data = [[plains for _ in range(self.width)] for _ in range(self.height)]
 

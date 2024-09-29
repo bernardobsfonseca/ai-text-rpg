@@ -9,6 +9,7 @@ from Misc.misc import save_game
 from random import randint, seed
 from States.menu_base import MenuBase
 from States.menu_battle import MenuBattle
+from States.menu_merchant import MenuMerchant
 
 
 class MenuPlay(MenuBase):
@@ -16,6 +17,7 @@ class MenuPlay(MenuBase):
         super().__init__()
 
         self.menu_battle = None
+        self.menu_merchant = None
         self.hero = hero
         self.seed_value = seed_value
 
@@ -25,21 +27,23 @@ class MenuPlay(MenuBase):
         self.game_map = Map(self.map_x, self.map_y, self.seed_value, hero)
 
         self.in_battle = False
+        self.in_merchant = False
         self.choice = ""
 
         self.previous_terrain = ""
 
     def draw_menu(self):
-
-        if not self.in_battle:
+        if self.in_merchant:
+            self.in_merchant = self.menu_merchant.draw_menu()
+        elif self.in_battle:
+            self.in_battle = self.menu_battle.draw_menu()
+        elif not self.in_battle and not self.in_merchant:
             if self.hero.alive is False:
                 misc.clear()
                 self.draw_death()
                 input(">")
                 return False
             return self.draw_menu_play()
-        else:
-            self.in_battle = self.menu_battle.draw_menu()
 
     def draw_menu_play(self):
         misc.draw_line()
@@ -48,7 +52,8 @@ class MenuPlay(MenuBase):
         self.draw_opcoes_hero()
         misc.draw_line()
 
-        self.event_ambient()
+        self.merchant_event()
+        #self.event_ambient()
         self.game_map.display_map()
 
         misc.draw_line()
@@ -88,7 +93,7 @@ class MenuPlay(MenuBase):
         seed(seed_value)
 
         num = randint(0, 10)
-        if num >= 9:
+        if num >= 11:
             self.battle_event()
 
     def event_ambient(self):
@@ -112,9 +117,14 @@ class MenuPlay(MenuBase):
                                           self.game_map.current_tile)
             self.in_battle = True
 
+    def merchant_event(self):
+        if self.game_map.current_tile == "merchant":
+            self.menu_merchant = MenuMerchant(self.hero)
+            self.in_merchant = True
+
     def select_enemy(self):
         return enemies.list_enemies[
-            randint(0, len(enemies.list_enemies)-1)
+            randint(0, len(enemies.list_enemies) - 1)
         ]
 
     def status_play(self):
@@ -131,6 +141,7 @@ class MenuPlay(MenuBase):
         print(f"ATAQUE: {self.hero.atk}")
         print(f"POÇÕES: {self.hero.potions}")
         print(f"GEMS: {self.hero.gems}")
+        print(f"Tile: {self.game_map.current_tile}")
 
     def draw_opcoes_hero(self):
         print("1 - Norte")
