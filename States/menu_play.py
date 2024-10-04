@@ -9,6 +9,7 @@ from Misc.misc import save_game
 from random import randint, seed
 from States.menu_base import MenuBase
 from States.menu_battle import MenuBattle
+from States.menu_merchant import MenuMerchant
 
 
 class MenuPlay(MenuBase):
@@ -16,6 +17,7 @@ class MenuPlay(MenuBase):
         super().__init__()
 
         self.menu_battle = None
+        self.menu_merchant = None
         self.hero = hero
         self.seed_value = seed_value
 
@@ -25,21 +27,23 @@ class MenuPlay(MenuBase):
         self.game_map = Map(self.map_x, self.map_y, self.seed_value, hero)
 
         self.in_battle = False
+        self.in_merchant = False
         self.choice = ""
 
         self.previous_terrain = ""
 
     def draw_menu(self):
-
-        if not self.in_battle:
+        if self.in_merchant:
+            self.in_merchant = self.menu_merchant.draw_menu()
+        elif self.in_battle:
+            self.in_battle = self.menu_battle.draw_menu()
+        elif not self.in_battle and not self.in_merchant:
             if self.hero.alive is False:
                 misc.clear()
                 self.draw_death()
                 input(">")
                 return False
             return self.draw_menu_play()
-        else:
-            self.in_battle = self.menu_battle.draw_menu()
 
     def draw_menu_play(self):
         misc.draw_line()
@@ -48,7 +52,6 @@ class MenuPlay(MenuBase):
         self.draw_opcoes_hero()
         misc.draw_line()
 
-        self.event_ambient()
         self.game_map.display_map()
 
         misc.draw_line()
@@ -81,15 +84,17 @@ class MenuPlay(MenuBase):
 
     def step(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
-        self.event()
+        self.event_battle()
+        self.event_merchant()
+        self.event_ambient()
 
-    def event(self):
+    def event_battle(self):
         seed_value = int(time.time())
         seed(seed_value)
 
         num = randint(0, 10)
         if num >= 9:
-            self.battle_event()
+            self.start_battle()
 
     def event_ambient(self):
         weather = ambient_modifiers.get_weather_modifier()
@@ -99,9 +104,10 @@ class MenuPlay(MenuBase):
         if self.previous_terrain != terrain:
             self.previous_terrain = terrain
             se.scene_ambient.create_scene(f"a {weather} {terrain} at {day_time}")
-            print("\n")
+            print('\n')
+            print('> ')
 
-    def battle_event(self):
+    def start_battle(self):
         seed_value = int(time.time())
         seed(seed_value)
 
@@ -112,9 +118,14 @@ class MenuPlay(MenuBase):
                                           self.game_map.current_tile)
             self.in_battle = True
 
+    def event_merchant(self):
+        if self.game_map.current_tile == "merchant":
+            self.in_merchant = True
+            self.menu_merchant = MenuMerchant(self.hero)
+
     def select_enemy(self):
         return enemies.list_enemies[
-            randint(0, len(enemies.list_enemies)-1)
+            randint(0, len(enemies.list_enemies) - 1)
         ]
 
     def status_play(self):

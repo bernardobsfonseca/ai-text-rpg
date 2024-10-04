@@ -73,13 +73,13 @@ class MenuBattle(MenuBase):
 
     def status_battle(self):
         if self.hero.hp <= 0:
-            print("morreu")
+            print("You Died")
             input("> ")
             self.hero.alive = False
             self.enemy.reset_hp()
             return False
         elif self.enemy.hp <= 0:
-            print("ganhou")
+            print("You Win!")
             input("> ")
             self.enemy.reset_hp()
             return False

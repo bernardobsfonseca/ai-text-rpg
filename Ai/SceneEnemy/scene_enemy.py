@@ -6,6 +6,7 @@ from Misc import global_vars
 
 scene_enemy = None
 
+
 class SceneEnemy(AiModel):
     def __init__(self):
         super().__init__()
