@@ -10,13 +10,13 @@ class MenuInicial(MenuBase):
     def __init__(self):
         super().__init__()
 
-        print("Carregando gerador de cena de cenário...")
-        #sa.initialize_scene_embient()
+        print("Carregando gerador cenário...")
+        sa.initialize_scene_embient()
 
         print("\n")
 
-        print("Carregando gerador de cena de batalha...")
-        #se.initialize_scene_enemy()
+        print("Carregando gerador batalha...")
+        se.initialize_scene_enemy()
 
         misc.clear()
 

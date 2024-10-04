@@ -52,8 +52,6 @@ class MenuPlay(MenuBase):
         self.draw_opcoes_hero()
         misc.draw_line()
 
-        self.merchant_event()
-        #self.event_ambient()
         self.game_map.display_map()
 
         misc.draw_line()
@@ -86,15 +84,17 @@ class MenuPlay(MenuBase):
 
     def step(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
-        self.event()
+        self.event_battle()
+        self.event_merchant()
+        self.event_ambient()
 
-    def event(self):
+    def event_battle(self):
         seed_value = int(time.time())
         seed(seed_value)
 
         num = randint(0, 10)
-        if num >= 11:
-            self.battle_event()
+        if num >= 9:
+            self.start_battle()
 
     def event_ambient(self):
         weather = ambient_modifiers.get_weather_modifier()
@@ -104,9 +104,10 @@ class MenuPlay(MenuBase):
         if self.previous_terrain != terrain:
             self.previous_terrain = terrain
             se.scene_ambient.create_scene(f"a {weather} {terrain} at {day_time}")
-            print("\n")
+            print('\n')
+            print('> ')
 
-    def battle_event(self):
+    def start_battle(self):
         seed_value = int(time.time())
         seed(seed_value)
 
@@ -117,10 +118,10 @@ class MenuPlay(MenuBase):
                                           self.game_map.current_tile)
             self.in_battle = True
 
-    def merchant_event(self):
+    def event_merchant(self):
         if self.game_map.current_tile == "merchant":
-            self.menu_merchant = MenuMerchant(self.hero)
             self.in_merchant = True
+            self.menu_merchant = MenuMerchant(self.hero)
 
     def select_enemy(self):
         return enemies.list_enemies[
@@ -141,7 +142,6 @@ class MenuPlay(MenuBase):
         print(f"ATAQUE: {self.hero.atk}")
         print(f"POÇÕES: {self.hero.potions}")
         print(f"GEMS: {self.hero.gems}")
-        print(f"Tile: {self.game_map.current_tile}")
 
     def draw_opcoes_hero(self):
         print("1 - Norte")
