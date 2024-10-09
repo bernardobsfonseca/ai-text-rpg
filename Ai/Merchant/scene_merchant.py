@@ -37,9 +37,3 @@ class SceneMerchant:
         llm_model = self.load_llm()
         chain = LLMChain(llm=llm_model, prompt=self.prompt_template, memory=self.memory)
         return chain
-
-
-# scene = SceneMerchant()
-# chain = scene.create_chain()
-# resp = chain.invoke('hi sir')
-# print(resp['text'])

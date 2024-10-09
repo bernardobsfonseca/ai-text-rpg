@@ -3,7 +3,7 @@ from States.menu_inicial import MenuInicial
 from States.menu_play import MenuPlay
 
 menu_inicial = MenuInicial()
-menu_play = None  # Inicializa menu_play como None
+menu_play = None
 
 
 def start():

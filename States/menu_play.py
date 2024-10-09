@@ -137,26 +137,26 @@ class MenuPlay(MenuBase):
     def draw_status_hero(self):
         print(f"LOC: {self.hero.x}, {self.hero.y}")
         print("STATUS")
-        print(f"NOME: {self.hero.name}")
+        print(f"NAME: {self.hero.name}")
         print(f"HP: {self.hero.hp}")
-        print(f"ATAQUE: {self.hero.atk}")
-        print(f"POÇÕES: {self.hero.potions}")
+        print(f"ATTACK: {self.hero.atk}")
+        print(f"POTIONS: {self.hero.potions}")
         print(f"GEMS: {self.hero.gems}")
 
     def draw_opcoes_hero(self):
-        print("1 - Norte")
-        print("2 - Leste")
-        print("3 - Sul")
-        print("4 - Oeste")
-        print("5 - Usar poção")
-        print("0 - Salvar e sair")
+        print("1 - North")
+        print("2 - East")
+        print("3 - Sout")
+        print("4 - West")
+        print("5 - Use potion")
+        print("0 - Save and quit")
 
     def draw_death(self):
         print("""
          __     ______  _    _   _____ _____ ______ _____  
-         \ \   / / __ \| |  | | |  __ \_   _|  ____|  __ \ 
-          \ \_/ / |  | | |  | | | |  | || | | |__  | |  | |
-           \   /| |  | | |  | | | |  | || | |  __| | |  | |
+         | |   / / __ || |  | | |  __ |_   _|  ____|  __ | 
+          | |_/ / |  | | |  | | | |  | || | | |__  | |  | |
+           |   /| |  | | |  | | | |  | || | |  __| | |  | |
             | | | |__| | |__| | | |__| || |_| |____| |__| |
-            |_|  \____/ \____/  |_____/_____|______|_____/ 
+            |_|  |____| |____|  |_____|_____|______|_____| 
         """)

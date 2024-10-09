@@ -42,7 +42,7 @@ class MenuInicial(MenuBase):
             misc.clear()
 
     def new_game(self):
-        name = input("Digite seu nome: ")
+        name = input("Digite o nome de seu personagem: ")
         hero = Hero(name=name)
         seed_value = randint(0, 1000)
 
