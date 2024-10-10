@@ -84,16 +84,16 @@ class MenuPlay(MenuBase):
 
     def step(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
-        self.event_battle()
-        self.event_merchant()
         self.event_ambient()
+        self.event_merchant()
+        self.event_battle()
 
     def event_battle(self):
         seed_value = int(time.time())
         seed(seed_value)
 
-        num = randint(0, 10)
-        if num >= 9:
+        num = randint(0, 25)
+        if num == 25:
             self.start_battle()
 
     def event_ambient(self):
@@ -105,7 +105,7 @@ class MenuPlay(MenuBase):
             self.previous_terrain = terrain
             se.scene_ambient.create_scene(f"a {weather} {terrain} at {day_time}")
             print('\n')
-            print('> ')
+            input('> ')
 
     def start_battle(self):
         seed_value = int(time.time())

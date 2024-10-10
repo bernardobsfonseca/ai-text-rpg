@@ -51,6 +51,10 @@ class MenuBattle(MenuBase):
             else:
                 print(f"Não conseguiu fugir!")
                 input("> ")
+        else:
+            print(f"Opção inválida!")
+            input("> ")
+            return True
 
         misc.draw_line()
 

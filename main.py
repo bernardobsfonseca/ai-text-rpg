@@ -5,6 +5,8 @@ from States.menu_play import MenuPlay
 menu_inicial = MenuInicial()
 menu_play = None
 
+# não use a palavra scene
+
 
 def start():
     run = True
@@ -12,8 +14,14 @@ def start():
 
     while run:
         if play is False:
-            hero, seed_value = menu_inicial.draw_menu()
-            clear()
+            hero = None
+            try:
+                hero, seed_value = menu_inicial.draw_menu()
+                clear()
+            except:
+                clear()
+                hero, seed_value = menu_inicial.draw_menu()
+                clear()
             if hero:
                 global menu_play
                 menu_play = MenuPlay(hero, seed_value)
