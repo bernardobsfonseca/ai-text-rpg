@@ -1,3 +1,5 @@
+import warnings
+
 from Misc.misc import clear
 from States.menu_inicial import MenuInicial
 from States.menu_play import MenuPlay
@@ -5,7 +7,7 @@ from States.menu_play import MenuPlay
 menu_inicial = MenuInicial()
 menu_play = None
 
-# não use a palavra scene
+warnings.filterwarnings('ignore')
 
 
 def start():

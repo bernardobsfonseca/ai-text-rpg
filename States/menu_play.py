@@ -93,7 +93,7 @@ class MenuPlay(MenuBase):
         seed(seed_value)
 
         num = randint(0, 25)
-        if num == 25:
+        if num >= 20:
             self.start_battle()
 
     def event_ambient(self):
