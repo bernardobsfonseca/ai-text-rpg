@@ -36,13 +36,17 @@ class MenuInicial(MenuBase):
         elif choice == "2":
             return self.load_game()
         elif choice == "3":
-            self.how_to_play()
+            return self.how_to_play()
         elif choice == "4":
             self.sair()
             misc.clear()
+        else:
+            print('Opção inválida')
+            input('> ')
+            return None, None
 
     def new_game(self):
-        name = input("Digite seu nome: ")
+        name = input("Digite o nome de seu personagem: ")
         hero = Hero(name=name)
         seed_value = randint(0, 1000)
 
@@ -55,7 +59,39 @@ class MenuInicial(MenuBase):
         return hero, seed_value
 
     def how_to_play(self):
-        pass
+        print("""
+Inputs:
+    > O sinal '>' espera a tecla 'Enter' para trocar de tela
+    > O sinal de '#' espera um input do jogador
+
+Movimentação e itens:
+    > O 'P' é o jogador
+    > Mova-se pelo mapa utilizando as teclas '1', '2', '3' e '4'
+    > Use poções utilizando a tecla '5'
+    > Salve o estado atual e saia do jogo utilizando a tecla '0'
+
+Terrenos:
+    > Os '.'s são terrenos de planice
+    > Os '8's são florestas
+    > Os '~'s são terrenos alagados
+    > Os 'A's são terrenos montanhosos
+    > Os 'M's são florestas de pinheiros
+    > A cada mudança de terrenos será gerada uma nova descrição
+
+Batalha:
+    > Use '1' para atacar
+    > Use '2' para usar uma poção
+    > use '3' para tentar fugir do inimigo
+
+Mercador:
+    > Representado pelo 'M' no mapa
+    > É possível ter um dialogo com ele
+    > O momento de falar é indicado pelo 'You:' no input
+    > Para comprar poções digite 'potion'/'potions' e o número de poções na mesma frase. Ex: 'i want 5 potions'
+    > Para comprar ataque digite 'sharpen'/'sharpness' e o número de 'ataques' na mesma frase. Ex: 'i want 5 sharpness'
+        """)
+        input('> ')
+        return None, None
 
     def sair(self):
         choice_sair = input("# Realmente deseja sair (s/n)?: ")

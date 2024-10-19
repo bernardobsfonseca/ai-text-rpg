@@ -30,9 +30,9 @@ class MenuBattle(MenuBase):
         self.draw_status_enemy()
         misc.draw_line()
 
-        print("1 - Atacar")
-        print("2 - Usar poção")
-        print("3 - Fugir")
+        print("1 - Attack")
+        print("2 - Use potion")
+        print("3 - Run!")
 
         self.choice = input("# ")
 
@@ -51,6 +51,10 @@ class MenuBattle(MenuBase):
             else:
                 print(f"Não conseguiu fugir!")
                 input("> ")
+        else:
+            print(f"Opção inválida!")
+            input("> ")
+            return True
 
         misc.draw_line()
 

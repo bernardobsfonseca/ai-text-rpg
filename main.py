@@ -1,9 +1,13 @@
+import warnings
+
 from Misc.misc import clear
 from States.menu_inicial import MenuInicial
 from States.menu_play import MenuPlay
 
 menu_inicial = MenuInicial()
-menu_play = None  # Inicializa menu_play como None
+menu_play = None
+
+warnings.filterwarnings('ignore')
 
 
 def start():
@@ -12,8 +16,14 @@ def start():
 
     while run:
         if play is False:
-            hero, seed_value = menu_inicial.draw_menu()
-            clear()
+            hero = None
+            try:
+                hero, seed_value = menu_inicial.draw_menu()
+                clear()
+            except:
+                clear()
+                hero, seed_value = menu_inicial.draw_menu()
+                clear()
             if hero:
                 global menu_play
                 menu_play = MenuPlay(hero, seed_value)

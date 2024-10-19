@@ -78,6 +78,10 @@ class MenuMerchant(MenuBase):
 
     def _handle_transaction(self, phrase):
         potions, sharpness, quantity = self._parse_dialogue(phrase)
+
+        if not quantity and not potions and not sharpness:
+            return True
+
         if not quantity:
             print("Invalid quantity.")
             return False
@@ -86,7 +90,7 @@ class MenuMerchant(MenuBase):
             return self._purchase_item('Potion', global_vars.potion_price, quantity, self.hero.buy_potions)
         elif sharpness:
             return self._purchase_item('Sharpen Sword', global_vars.sharpen_price, quantity, self.hero.sharpen_sword)
-        return None
+        return True
 
     def _parse_dialogue(self, phrase):
         potions = re.findall(r'\b(potion|potions)\b', phrase, re.IGNORECASE)
@@ -101,7 +105,7 @@ class MenuMerchant(MenuBase):
             print(f'>>> You don’t have enough money for {quantity} {item_name.lower()}s! <<<')
         else:
             purchase_method(quantity)
-            print(f'>>> You bought {quantity} {item_name.lower()}s <<<')
+            print(f'>>> You bought {quantity} {item_name.lower()} <<<')
         input('> ')
         return self.hero.gems >= total_cost
 
@@ -120,5 +124,6 @@ class MenuMerchant(MenuBase):
 
     def _continue_chat(self):
         self.chat_list.append(f'You: {self.phrase}')
+        print('[wait...]')
         response = self._get_merchant_response(self.phrase)
         self._append_chat("Merchant", response['text'])

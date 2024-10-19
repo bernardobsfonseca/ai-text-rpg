@@ -1,5 +1,8 @@
+import warnings
+
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
+from langchain_core.output_parsers import StrOutputParser
 from langchain_experimental.chat_models import Llama2Chat
 from langchain_core.messages import SystemMessage
 from langchain_core.prompts.chat import (
@@ -37,9 +40,3 @@ class SceneMerchant:
         llm_model = self.load_llm()
         chain = LLMChain(llm=llm_model, prompt=self.prompt_template, memory=self.memory)
         return chain
-
-
-# scene = SceneMerchant()
-# chain = scene.create_chain()
-# resp = chain.invoke('hi sir')
-# print(resp['text'])
