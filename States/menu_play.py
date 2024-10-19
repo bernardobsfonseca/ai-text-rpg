@@ -1,5 +1,4 @@
 import time
-
 from Ai.SceneAmbient import scene_ambient as se
 from Ai.SceneAmbient import scene_ambient_modifiers as ambient_modifiers
 from Characters import enemies

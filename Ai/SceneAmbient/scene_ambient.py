@@ -1,4 +1,3 @@
-from langchain.chains.llm import LLMChain
 from langchain_community.llms import LlamaCpp
 from langchain_core.prompts.few_shot import FewShotPromptTemplate
 from Ai.SceneAmbient import scene_ambient_misc as ms

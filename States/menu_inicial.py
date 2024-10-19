@@ -2,7 +2,6 @@ from random import randint
 from Characters.hero import Hero
 from Misc import misc
 from States.menu_base import MenuBase
-from Ai.SceneAmbient import scene_ambient as sa
 from Ai.SceneEnemy import scene_enemy as se
 
 

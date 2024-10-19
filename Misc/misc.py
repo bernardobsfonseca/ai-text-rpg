@@ -1,4 +1,3 @@
-# Funções diversas
 import os
 from pathlib import Path
 from Characters.hero import Hero

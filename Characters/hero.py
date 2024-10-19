@@ -1,5 +1,4 @@
 import random
-
 from Characters.character import Character
 from Misc import global_vars
 

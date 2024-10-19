@@ -1,5 +1,6 @@
 from random import randint, seed
 
+
 class Tile:
     def __init__(self, name:str, symbol: str, color: str | None = None):
         self.name = name
