@@ -11,7 +11,7 @@ class MenuInicial(MenuBase):
         super().__init__()
 
         print("Carregando gerador cenário...")
-        sa.initialize_scene_embient()
+        #sa.initialize_scene_embient()
 
         print("\n")
 

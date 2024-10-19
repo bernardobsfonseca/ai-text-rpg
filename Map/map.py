@@ -5,6 +5,7 @@ class Tile:
         self.name = name
         self.symbol = f"{color}{symbol}{ANSI_RESET}" if color else symbol
 
+
 ANSI_RESET = "\033[0m"
 ANSI_YELLOW = "\033[33m"
 ANSI_GREEN = "\033[32m"
@@ -13,6 +14,7 @@ ANSI_RED = "\033[31m"
 ANSI_WHITE = "\033[97m"
 ANSI_MAGENTA = "\033[35m"
 ANSI_CYAN = "\033[36m"
+ANSI_BRIGHT_RED = "\033[91m"
 
 plains = Tile("plains", ".", ANSI_YELLOW)
 forest = Tile("forest", "8", ANSI_GREEN)
@@ -21,6 +23,7 @@ mountain = Tile("mountain", "A", ANSI_WHITE)
 water = Tile("lake", "~", ANSI_CYAN)
 player = Tile("player", "P", ANSI_RED)
 merchant = Tile("merchant", "M", ANSI_RED)
+dragon = Tile("dragon", "D", ANSI_BRIGHT_RED)
 
 
 class Map:
@@ -39,6 +42,7 @@ class Map:
         self.generate_patch(mountain, 3, 5, 7)
         self.generate_patch(water, 1, 5, 8)
         self.generate_patch(merchant, 1, 1, 1, False)
+        self.generate_patch(dragon, 1, 1, 1, False)
 
         self.construct_map(player_x=hero.x, player_y=hero.y)
 

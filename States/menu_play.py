@@ -3,6 +3,7 @@ import time
 from Ai.SceneAmbient import scene_ambient as se
 from Ai.SceneAmbient import scene_ambient_modifiers as ambient_modifiers
 from Characters import enemies
+from Characters.enemies import dragon
 from Map.map import Map
 from Misc import misc
 from Misc.misc import save_game
@@ -26,6 +27,7 @@ class MenuPlay(MenuBase):
         self.map_y = randint(10, 15)
         self.game_map = Map(self.map_x, self.map_y, self.seed_value, hero)
 
+        self.in_battle_dragon = False
         self.in_battle = False
         self.in_merchant = False
         self.choice = ""
@@ -37,6 +39,16 @@ class MenuPlay(MenuBase):
             self.in_merchant = self.menu_merchant.draw_menu()
         elif self.in_battle:
             self.in_battle = self.menu_battle.draw_menu()
+        elif self.in_battle_dragon:
+            self.in_battle_dragon = self.menu_battle.draw_menu()
+            if self.in_battle_dragon is False:
+                misc.clear()
+                self.draw_win()
+                input(">")
+                save_game(self.hero, self.seed_value)
+                print('Game Saved!')
+                input("> ")
+                return False
         elif not self.in_battle and not self.in_merchant:
             if self.hero.alive is False:
                 misc.clear()
@@ -84,17 +96,10 @@ class MenuPlay(MenuBase):
 
     def step(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
-        self.event_ambient()
+        #self.event_ambient()
         self.event_merchant()
-        self.event_battle()
-
-    def event_battle(self):
-        seed_value = int(time.time())
-        seed(seed_value)
-
-        num = randint(0, 25)
-        if num >= 20:
-            self.start_battle()
+        #self.event_battle()
+        self.dragon_battle()
 
     def event_ambient(self):
         weather = ambient_modifiers.get_weather_modifier()
@@ -107,6 +112,14 @@ class MenuPlay(MenuBase):
             print('\n')
             input('> ')
 
+    def event_battle(self):
+        seed_value = int(time.time())
+        seed(seed_value)
+
+        num = randint(0, 25)
+        if num >= 20:
+            self.start_battle()
+
     def start_battle(self):
         seed_value = int(time.time())
         seed(seed_value)
@@ -117,6 +130,13 @@ class MenuPlay(MenuBase):
             self.menu_battle = MenuBattle(self.hero, enemy_selected,
                                           self.game_map.current_tile)
             self.in_battle = True
+
+    def dragon_battle(self):
+        if self.game_map.current_tile == 'dragon':
+            self.menu_battle = MenuBattle(self.hero, dragon,
+                                          self.game_map.current_tile)
+            self.in_battle_dragon = True
+
 
     def event_merchant(self):
         if self.game_map.current_tile == "merchant":
@@ -142,6 +162,7 @@ class MenuPlay(MenuBase):
         print(f"ATTACK: {self.hero.atk}")
         print(f"POTIONS: {self.hero.potions}")
         print(f"GEMS: {self.hero.gems}")
+        print(f"TILE: {self.game_map.current_tile}")
 
     def draw_opcoes_hero(self):
         print("1 - North")
@@ -159,4 +180,14 @@ class MenuPlay(MenuBase):
            |   /| |  | | |  | | | |  | || | |  __| | |  | |
             | | | |__| | |__| | | |__| || |_| |____| |__| |
             |_|  |____| |____|  |_____|_____|______|_____| 
+        """)
+
+    def draw_win(self):
+        print("""
+         __     ______  _    _  __          _______ _   _ 
+         | |   / / __ || |  | | | |        / /_   _| | | |
+          | |_/ / |  | | |  | |  | |  /|  / /  | | |  || |
+           |   /| |  | | |  | |   | |/  |/ /   | | | . ` |
+            | | | |__| | |__| |    |  /|  /   _| |_| ||  |
+            |_|  |____| |____|      |/  |/   |_____|_| |_|
         """)

@@ -7,6 +7,7 @@ ondine = Enemy("Ondine", 12, 4)
 sylph = Enemy("Sylph", 10, 4)
 gnome = Enemy("Gnome", 20, 3)
 fire_salamander = Enemy("Fire Salamander", 12, 6)
+dragon = Enemy("Dragon", 10, 6)
 
 list_enemies = [
     goblinoide,

@@ -43,16 +43,20 @@ class MenuBattle(MenuBase):
         elif self.choice == "2":
             self.hero.use_potion()
         elif self.choice == "3":
-            chance = randint(0, 10)
-            if chance >= 6:
-                print(f"Você fugiu de {self.enemy.name}!")
+            if self.enemy.name == 'dragon':
+                print("You can't run away!!!")
                 input("> ")
-                return False
             else:
-                print(f"Não conseguiu fugir!")
-                input("> ")
+                chance = randint(0, 10)
+                if chance >= 6:
+                    print(f"You ran away from the {self.enemy.name}!")
+                    input("> ")
+                    return False
+                else:
+                    print(f"You couldn't ran away!")
+                    input("> ")
         else:
-            print(f"Opção inválida!")
+            print(f"Invalid option!")
             input("> ")
             return True
 
@@ -84,6 +88,7 @@ class MenuBattle(MenuBase):
             return False
         elif self.enemy.hp <= 0:
             print("You Win!")
+            self.hero.add_gems()
             input("> ")
             self.enemy.reset_hp()
             return False

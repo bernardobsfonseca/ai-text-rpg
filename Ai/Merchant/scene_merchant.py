@@ -1,8 +1,5 @@
-import warnings
-
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
-from langchain_core.output_parsers import StrOutputParser
 from langchain_experimental.chat_models import Llama2Chat
 from langchain_core.messages import SystemMessage
 from langchain_core.prompts.chat import (
@@ -13,11 +10,13 @@ from langchain_core.prompts.chat import (
 from os.path import expanduser
 from langchain_community.llms import LlamaCpp
 from Ai.Merchant.scene_merchant_misc import template
+from Ai.ai_model import AiModel
 from Misc import global_vars
 
 
-class SceneMerchant:
+class SceneMerchant(AiModel):
     def __init__(self):
+        super().__init__()
         self.model_path = expanduser(global_vars.model_path)
         self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
         self.template_messages = [
