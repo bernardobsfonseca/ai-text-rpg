@@ -3,6 +3,7 @@ from Characters.hero import Hero
 from Misc import misc
 from States.menu_base import MenuBase
 from Ai.SceneEnemy import scene_enemy as se
+from Ai.SceneAmbient import scene_ambient as sa
 
 
 class MenuInicial(MenuBase):
@@ -10,7 +11,7 @@ class MenuInicial(MenuBase):
         super().__init__()
 
         print("Carregando gerador cenário...")
-        #a.initialize_scene_embient()
+        sa.initialize_scene_embient()
 
         print("\n")
 
