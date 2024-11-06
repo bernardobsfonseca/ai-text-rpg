@@ -40,13 +40,18 @@ class MenuPlay(MenuBase):
             self.in_battle = self.menu_battle.draw_menu()
         elif self.in_battle_dragon:
             self.in_battle_dragon = self.menu_battle.draw_menu()
-            if self.in_battle_dragon is False:
+            if self.in_battle_dragon == 'win':
                 misc.clear()
                 self.draw_win()
                 input(">")
                 save_game(self.hero, self.seed_value)
                 print('Game Saved!')
                 input("> ")
+                return False
+            if self.in_battle_dragon is False:
+                misc.clear()
+                self.draw_death()
+                input(">")
                 return False
         elif not self.in_battle and not self.in_merchant:
             if self.hero.alive is False:
@@ -95,9 +100,9 @@ class MenuPlay(MenuBase):
 
     def step(self):
         self.game_map.construct_map(self.hero.x, self.hero.y)
-        #self.event_ambient()
+        self.event_ambient()
         self.event_merchant()
-        #self.event_battle()
+        self.event_battle()
         self.dragon_battle()
 
     def event_ambient(self):

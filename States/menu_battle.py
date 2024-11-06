@@ -91,7 +91,7 @@ class MenuBattle(MenuBase):
             self.hero.add_gems()
             input("> ")
             self.enemy.reset_hp()
-            return False
+            return "win"
 
         return True
 
