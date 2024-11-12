@@ -33,6 +33,7 @@
 <br>`python main.py`
 * Aguarde o modelo ser carregado nos geradores de cenas³
 
+---
 
 1- Ambientes Virtuais isolam as dependências de cada projeto, permitindo usar diferentes versões de pacotes sem conflitos. Isso facilita a organização, manutenção e compartilhamento de projetos Python.
 <br>2- Coloque o ".gguf" junto. Ex: C:/modelo/llama-2-7b-chat.Q4_K_M.gguf
