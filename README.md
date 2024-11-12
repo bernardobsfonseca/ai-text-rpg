@@ -5,7 +5,7 @@
 
 ### Instalação e Preparação do ambiente
 * Clone o repositório
-* Abra utilizando utilizando sua IDE
+* Abra utilizando sua IDE
 * Abra o prompt da IDE na pasta do projeto e crie a pasta do Ambiente Virtual¹ com o comando:
 </br>`python -m venv venv`
 * Ative o ambiente virtual com o comando:
