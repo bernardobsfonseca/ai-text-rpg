@@ -166,12 +166,11 @@ class MenuPlay(MenuBase):
         print(f"ATTACK: {self.hero.atk}")
         print(f"POTIONS: {self.hero.potions}")
         print(f"GEMS: {self.hero.gems}")
-        print(f"TILE: {self.game_map.current_tile}")
 
     def draw_opcoes_hero(self):
         print("1 - North")
         print("2 - East")
-        print("3 - Sout")
+        print("3 - South")
         print("4 - West")
         print("5 - Use potion")
         print("0 - Save and quit")
