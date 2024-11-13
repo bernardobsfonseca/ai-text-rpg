@@ -61,4 +61,4 @@ def draw_line():
 
 
 def clear():
-    os.system("cls")
+    os.system("clear")
