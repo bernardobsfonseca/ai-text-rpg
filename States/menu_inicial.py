@@ -89,6 +89,7 @@ Mercador:
     > O momento de falar é indicado pelo 'You:' no input
     > Para comprar poções digite 'potion'/'potions' e o número de poções na mesma frase. Ex: 'i want 5 potions'
     > Para comprar ataque digite 'sharpen'/'sharpness' e o número de 'ataques' na mesma frase. Ex: 'i want 5 sharpness'
+    > Para sair digite 'bye'
 
 Objetivo - O Dragão:
     > Para vencer você deve matar o Dragão

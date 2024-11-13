@@ -25,6 +25,7 @@ class Hero(Character):
 
     def add_gems(self):
         gems = random.randint(10, 20)
+        self.gems += gems
         print(f'You got {gems} more gems')
 
     def buy_potions(self, times):

@@ -120,20 +120,18 @@ class MenuPlay(MenuBase):
         seed_value = int(time.time())
         seed(seed_value)
 
-        num = randint(0, 25)
-        if num >= 20:
+        num = randint(0, 40)
+        if num >= 36:
             self.start_battle()
 
     def start_battle(self):
         seed_value = int(time.time())
         seed(seed_value)
 
-        num = randint(0, 20)
-        if num > 0:
-            enemy_selected = self.select_enemy()
-            self.menu_battle = MenuBattle(self.hero, enemy_selected,
-                                          self.game_map.current_tile)
-            self.in_battle = True
+        enemy_selected = self.select_enemy()
+        self.menu_battle = MenuBattle(self.hero, enemy_selected,
+                                        self.game_map.current_tile)
+        self.in_battle = True
 
     def dragon_battle(self):
         if self.game_map.current_tile == 'dragon':
@@ -148,6 +146,9 @@ class MenuPlay(MenuBase):
             self.menu_merchant = MenuMerchant(self.hero)
 
     def select_enemy(self):
+        seed_value = int(time.time())
+        seed(seed_value)
+        
         return enemies.list_enemies[
             randint(0, len(enemies.list_enemies) - 1)
         ]
