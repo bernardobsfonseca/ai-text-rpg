@@ -1,4 +1,5 @@
 import os
+import platform
 from pathlib import Path
 from Characters.hero import Hero
 
@@ -61,4 +62,7 @@ def draw_line():
 
 
 def clear():
-    os.system("clear")
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
